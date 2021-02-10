@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>ex-dischi-musicali</title>
+        <!-- Link AXIOS/AJAX -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+        <!-- Link Vue -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+
+      <div id="app" class="container">
+        <header>
+          <div class="logo">
+            logo
+          </div>
+          <div class="nav">
+            <input type="text" v-model="query" @keyup.enter="searchMovie">
+          </div>
+        </header>
+        <!-- / header -->
+
+        <main>
+          <div class="content_box" v-for="film in filmSearched">
+            <p class="title">{{film.title}}</p>
+            <p class="o_title">{{film.original_title}}</p>
+            <p class="vote">{{film.vote_average}}</p>
+            <p class="lan">{{film.original_language}}</p>
+          </div>
+          <!-- <div class="content_box">
+            <p class="title">title</p>
+            <p class="o_title">original_title</p>
+            <p class="vote">vote_average</p>
+            <p class="lan">original_language</p>
+          </div> -->
+        </main>
+        <!-- / main -->
+
+      </div>
+      <!-- / container principale -->
+
+        <script src="js/script.js" charset="utf-8"></script>
+    </body>
+</html>
