@@ -38,14 +38,14 @@ let app = new Vue({
           // console.log(result.data.results);
           this.filmSearched = result.data.results;
           // console.log(this.filmSearched);
+          this.filmSearched.forEach(element => {
+            element.vote_star = Math.round(element.vote_average / 2);
+          });
         })//fine then
         .catch((error) => alert('errore'));
         console.log(this.filmSearched);
 
         //for each per le stelle, da problemi
-        this.filmSearched.forEach(element => {
-          element.vote_average = Math.round(element.vote_average / 2);
-        });
 
 
 

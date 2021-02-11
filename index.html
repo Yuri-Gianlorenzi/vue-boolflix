@@ -32,9 +32,9 @@
             <p class="o_title">{{film.original_title}}</p>
             <p class="vote">{{film.vote_average}}</p>
             <p class="lan">{{film.original_language}}</p>
-            <!-- <p class="lan">{{film.vote_star}}</p> -->
+            <p class="lan">{{film.vote_star}}</p>
             <ul class="star_vote">
-              <li v-for="n in 5" :class="(film.vote_average >= n) ? 'yellow' : ''"><i class="fas fa-star"></i></li>
+              <li v-for="n in 5" :class="(film.vote_star >= n) ? 'yellow' : ''"><i class="fas fa-star"></i></li>
             </ul>
           </div>
           <!-- <div class="content_box">
