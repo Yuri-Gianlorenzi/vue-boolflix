@@ -13,14 +13,17 @@
 
 header {
   height: 70px;
+  width: 100%;
   background-color: coral;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  position: fixed;
 }
 
 
 main {
+  margin-top: 70px;
   width: 100%;
   height: 100%;
   display: flex;
@@ -32,8 +35,28 @@ main {
 .content_box {
   background-color: lightcoral;
   flex-basis: calc(100% / 5);
-  margin: 0px 15px;
+  margin: 10px 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.content_box img {
+  width: 250px;
+  height: 350px;
+}
+
+.content_box ul.star_vote {
+  display: flex;
+  flex-direction: row;
+}
+
+.content_box ul.star_vote li {
+  list-style: none;
+  color: grey;
+  margin: 0px 2px;
+}
+
+.content_box ul.star_vote li.yellow {
+  color: yellow;
 }

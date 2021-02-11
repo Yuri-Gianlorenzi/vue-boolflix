@@ -42,7 +42,26 @@ let app = new Vue({
         .catch((error) => alert('errore'));
         console.log(this.filmSearched);
 
+        //for each per le stelle, da problemi
+        this.filmSearched.forEach(element => {
+          element.vote_average = Math.round(element.vote_average / 2);
+        });
+
+
+
+
     }//fine searchMovie
+    // stelle() {
+    //   this.filmSearched = this.filmSearched.map(element => {
+    //     return {
+    //       ...element,
+    //       vote_star:  Math.round(element.vote_average / 2)
+    //     }
+    //   })
+    //
+    // }
+
+
 
   }//fine methods
 });//fine vue

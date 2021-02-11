@@ -3,6 +3,8 @@
     <head>
         <meta charset="utf-8">
         <title>yurflix</title>
+        <!-- link fontawesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
         <!-- Link AXIOS/AJAX -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
         <!-- Link Vue -->
@@ -24,12 +26,16 @@
         <!-- / header -->
 
         <main>
-          <div class="content_box" v-for="film in filmSearched">
-            <img :src="'https://image.tmdb.org/t/p/'+'w342'+film.poster_path" alt="">
+          <div class="content_box" v-for="film in filmSearched" v-if="filmSearched">
+            <img :src="'https://image.tmdb.org/t/p/'+'w342'+film.poster_path" :alt="film.original_title">
             <p class="title">{{film.title}}</p>
             <p class="o_title">{{film.original_title}}</p>
             <p class="vote">{{film.vote_average}}</p>
             <p class="lan">{{film.original_language}}</p>
+            <!-- <p class="lan">{{film.vote_star}}</p> -->
+            <ul class="star_vote">
+              <li v-for="n in 5" :class="(film.vote_average >= n) ? 'yellow' : ''"><i class="fas fa-star"></i></li>
+            </ul>
           </div>
           <!-- <div class="content_box">
             <p class="title">title</p>
