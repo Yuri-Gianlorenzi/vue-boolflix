@@ -38,14 +38,16 @@ let app = new Vue({
           // console.log(result.data.results);
           this.filmSearched = result.data.results;
           // console.log(this.filmSearched);
+
+          //il foreach al di fuori del then fa si che non venga letto dall'html l'aggiunta del vote_star,non facendo dunque funzionare il v-for delle stelle
           this.filmSearched.forEach(element => {
             element.vote_star = Math.round(element.vote_average / 2);
           });
         })//fine then
         .catch((error) => alert('errore'));
-        console.log(this.filmSearched);
 
-        //for each per le stelle, da problemi
+
+
 
 
 

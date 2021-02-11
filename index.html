@@ -27,7 +27,9 @@
 
         <main>
           <div class="content_box" v-for="film in filmSearched" v-if="filmSearched">
-            <img :src="'https://image.tmdb.org/t/p/'+'w342'+film.poster_path" :alt="film.original_title">
+            <!-- per inserire la stessa immagine tutte le volte che non abbiamo la copertina api, yutilizziamo un v-if/v-else -->
+            <img v-if="!film.poster_path" src="img/poster-placeholder.png" :alt="film.original_title">
+            <img v-else :src="'https://image.tmdb.org/t/p/'+'w342'+film.poster_path" :alt="film.original_title">
             <p class="title">{{film.title}}</p>
             <p class="o_title">{{film.original_title}}</p>
             <p class="vote">{{film.vote_average}}</p>
