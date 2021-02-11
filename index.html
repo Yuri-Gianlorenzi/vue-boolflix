@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>ex-dischi-musicali</title>
+        <title>yurflix</title>
         <!-- Link AXIOS/AJAX -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
         <!-- Link Vue -->
@@ -25,6 +25,7 @@
 
         <main>
           <div class="content_box" v-for="film in filmSearched">
+            <img :src="'https://image.tmdb.org/t/p/'+'w342'+film.poster_path" alt="">
             <p class="title">{{film.title}}</p>
             <p class="o_title">{{film.original_title}}</p>
             <p class="vote">{{film.vote_average}}</p>
