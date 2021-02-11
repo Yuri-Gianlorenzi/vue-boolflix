@@ -26,7 +26,9 @@ let app = new Vue({
 
   methods : {
 
-    searchMovie() {
+    searchGlobal() {
+
+      //WARINIG CHIAMATA SU MOVIE
       axios
         .get("https://api.themoviedb.org/3/search/movie", {
           params : {
@@ -46,35 +48,42 @@ let app = new Vue({
           });
 
 
-
-          // this.filmSearched.forEach(element => {
-          //   if (!this.whatLenguage.includes(element.original_language)) {
-          //     this.whatLenguage.push(element.original_language);
-          //   }
-          // });
-
-          // console.log(this.whatLenguage);
-
-
-        })//fine then
+        })//fine then chiamata movie
         .catch((error) => alert('errore'));
 
 
 
 
 
+      //WARINIG CHIAMATA SU MOVIE
+      axios
+        .get("https://api.themoviedb.org/3/search/tv", {
+          params : {
+            api_key: this.apiKey,
+            query : this.query,
+            language : 'it-IT'
+          }
+        })
+        .then((result) => {
+          console.log(result.data.page);
+          let tvSearched = '';
+          tvSearched = result.data.results;
+          console.log(tvSearched);
+
+          //oltre al forEhach per la key delle stelle, pushamo ogni elemento dell'array diversamente da sopra, prove per far si che vada sempre a buon fine, attualmente a volte stampa solo film al primo enter-press e ad un altro press anche le serie, a volte va e a volte no 
+          tvSearched.forEach(element => {
+            element.vote_star = Math.round(element.vote_average / 2);
+            this.filmSearched.push(element);
+          });
 
 
-    }//fine searchMovie
-    // stelle() {
-    //   this.filmSearched = this.filmSearched.map(element => {
-    //     return {
-    //       ...element,
-    //       vote_star:  Math.round(element.vote_average / 2)
-    //     }
-    //   })
-    //
-    // }
+        })//fine then chiamata movie
+        .catch((error) => alert('errore'));
+
+
+
+    }//fine searchGlobal
+
 
 
 
@@ -86,6 +95,21 @@ let app = new Vue({
 
 
 
+
+
+
+
+
+//non ha funzionato per fare le stelle
+// stelle() {
+//   this.filmSearched = this.filmSearched.map(element => {
+//     return {
+//       ...element,
+//       vote_star:  Math.round(element.vote_average / 2)
+//     }
+//   })
+//
+// }
 
 
 
