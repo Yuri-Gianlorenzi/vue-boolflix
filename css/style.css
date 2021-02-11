@@ -60,3 +60,8 @@ main {
 .content_box ul.star_vote li.yellow {
   color: yellow;
 }
+
+img.img_lang {
+  height: 20px;
+  width: 20px;
+}

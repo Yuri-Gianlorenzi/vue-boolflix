@@ -34,8 +34,10 @@
             <p class="o_title">{{film.original_title}}</p>
             <p class="vote">{{film.vote_average}}</p>
             <p class="lan">{{film.original_language}}</p>
+            <img class="img_lang" :src="'img/'+film.original_language+'.png'" alt="">
             <p class="lan">{{film.vote_star}}</p>
             <ul class="star_vote">
+              <!-- per le stelle viene utilizzato un v-for di lunghezza 5 (verranno stampate 5 stelle grige di base). con v-bind sulla classe coloriamo di giallo un numero di stelle pari al valore di vote_star, inserito nel then. la condizione fa si che iniziano a colorarsi dalla prima  -->
               <li v-for="n in 5" :class="(film.vote_star >= n) ? 'yellow' : ''"><i class="fas fa-star"></i></li>
             </ul>
           </div>

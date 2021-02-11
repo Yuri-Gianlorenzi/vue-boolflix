@@ -9,7 +9,8 @@ let app = new Vue({
   data : {
     query : '',
     apiKey : '1c2bfcf8efd8a513cb5a624bbe643c1b',
-    filmSearched : ''
+    filmSearched : '',
+    whatLenguage : '',
   },//fine data
 
   mounted() {
@@ -35,14 +36,26 @@ let app = new Vue({
           }
         })
         .then((result) => {
-          // console.log(result.data.results);
+          console.log(result.data.page);
           this.filmSearched = result.data.results;
-          // console.log(this.filmSearched);
+          console.log(this.filmSearched);
 
-          //il foreach al di fuori del then fa si che non venga letto dall'html l'aggiunta del vote_star,non facendo dunque funzionare il v-for delle stelle
+          //il foreach al di fuori del then fa si che non venga letto dall'html l'aggiunta del vote_star,non facendo dunque funzionare il v-for delle stelle. dentro il then aggiungiamo all'oggetto della richiesta una key che arrotonda il voto medio e proporziona ad una scala dove 5 è il massimo
           this.filmSearched.forEach(element => {
             element.vote_star = Math.round(element.vote_average / 2);
           });
+
+
+
+          // this.filmSearched.forEach(element => {
+          //   if (!this.whatLenguage.includes(element.original_language)) {
+          //     this.whatLenguage.push(element.original_language);
+          //   }
+          // });
+
+          // console.log(this.whatLenguage);
+
+
         })//fine then
         .catch((error) => alert('errore'));
 
