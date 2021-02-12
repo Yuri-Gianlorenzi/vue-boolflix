@@ -1,8 +1,3 @@
-// Attraverso una chiamata ajax all’Api di boolean avremo a disposizione una decina di dischi musicali.
-// Stampiamo tutto a schermo, in questo momento non è importante la parte grafica.
-// Bonus:
-// Creare una select con i seguenti generi: pop, rock, metal e jazz.
-// In base a cosa scegliamo nella select vedremo i corrispondenti cd.
 
 let app = new Vue({
   el : '#app',
@@ -10,10 +5,27 @@ let app = new Vue({
     query : '',
     apiKey : '1c2bfcf8efd8a513cb5a624bbe643c1b',
     filmSearched : '',
-    whatLenguage : '',
+    tvSearch : '',
+    all : '',
+    allTypes : ''
   },//fine data
 
   mounted() {
+
+
+      //per prendere tutti i generi e relativi id dall'api
+      axios
+      .get("https://api.themoviedb.org/3/genre/movie/list", {
+        params : {
+          api_key: this.apiKey,
+          language : 'it-IT'
+        }
+      })
+      .then((result) => {
+        console.log(result.data.genres)
+      })//fine then
+
+
 
 
 
@@ -28,57 +40,63 @@ let app = new Vue({
 
     searchGlobal() {
 
-      //WARINIG CHIAMATA SU MOVIE
-      axios
+      //WARINIG CHIAMATA SU MOVIE INSERITA IN UNA VARIABILE
+      let chiamataFilm = axios
         .get("https://api.themoviedb.org/3/search/movie", {
           params : {
             api_key: this.apiKey,
             query : this.query,
             language : 'it-IT'
           }
-        })
-        .then((result) => {
-          console.log(result.data.page);
-          this.filmSearched = result.data.results;
-          console.log(this.filmSearched);
+        });
 
-          //il foreach al di fuori del then fa si che non venga letto dall'html l'aggiunta del vote_star,non facendo dunque funzionare il v-for delle stelle. dentro il then aggiungiamo all'oggetto della richiesta una key che arrotonda il voto medio e proporziona ad una scala dove 5 è il massimo
-          this.filmSearched.forEach(element => {
-            element.vote_star = Math.round(element.vote_average / 2);
-          });
-
-
-        })//fine then chiamata movie
-        .catch((error) => alert('errore'));
-
-
-
-
-
-      //WARINIG CHIAMATA SU MOVIE
-      axios
+        //WARNING CHIAMATA SU TV INSERITA IN UNA VARIABILE
+      let chiamataSerie = axios
         .get("https://api.themoviedb.org/3/search/tv", {
           params : {
             api_key: this.apiKey,
             query : this.query,
             language : 'it-IT'
           }
-        })
-        .then((result) => {
-          console.log(result.data.page);
-          let tvSearched = '';
-          tvSearched = result.data.results;
-          console.log(tvSearched);
+        });
 
-          //oltre al forEhach per la key delle stelle, pushamo ogni elemento dell'array diversamente da sopra, prove per far si che vada sempre a buon fine, attualmente a volte stampa solo film al primo enter-press e ad un altro press anche le serie, a volte va e a volte no 
-          tvSearched.forEach(element => {
+        //CON QUESTO COMANDO LAVORIAMO CONTEMOTANEAMENTE SULLE 2 CHIAMATE: il metodo axios.all() permette di processare 2 richieste contemoraneamente, come argomento accetta un array, nel nostro caso inseriamo le 2 variabili precedenti in un array.
+        //Il metodo axios.all accetta un array come parametro. Ogni elemento dell'array è una richiesta e restituisce un oggetto promise. Quando tutte le richieste nell'array sono state completate, viene eseguito il metodo then.
+        // Il metodo axios.spread viene eseguito nel metodo then. Il metodo consiste nel ricevere una funzione come parametro e restituire una nuova funzione. Il parametro della funzione parametro ricevuta è la risposta restituita da ogni richiesta nel metodo axios.all.
+        axios.all([chiamataFilm, chiamataSerie])
+        .then(axios.spread((result,show) => {
+          //result è la variabile per la chiamata MOVIE
+          //show è la variabile per la chiamata SERIE TV
+          console.log(result.data.page);
+          this.filmSearched = result.data.results;
+          console.log(this.filmSearched);
+
+          this.tvSearch = show.data.results;
+          console.log(this.tvSearch);
+
+
+
+          //il foreach al di fuori del then fa si che non venga letto dall'html l'aggiunta del vote_star,non facendo dunque funzionare il v-for delle stelle. dentro il then aggiungiamo all'oggetto della richiesta una key che arrotonda il voto medio e proporziona ad una scala dove 5 è il massimo
+          this.filmSearched.forEach(element => {
             element.vote_star = Math.round(element.vote_average / 2);
-            this.filmSearched.push(element);
           });
 
+          console.log(show.data.page);
+          // console.log(tvSearched);
 
-        })//fine then chiamata movie
-        .catch((error) => alert('errore'));
+          //forEhach per la key delle stelle
+          this.tvSearch.forEach(element => {
+            element.vote_star = Math.round(element.vote_average / 2);
+          });
+
+          this.all = [...this.filmSearched,...this.tvSearch];
+
+
+        }))//fine then chiamata movie
+        .catch((error) => alert(error));
+
+
+
 
 
 
@@ -89,32 +107,3 @@ let app = new Vue({
 
   }//fine methods
 });//fine vue
-
-
-
-
-
-
-
-
-
-
-
-//non ha funzionato per fare le stelle
-// stelle() {
-//   this.filmSearched = this.filmSearched.map(element => {
-//     return {
-//       ...element,
-//       vote_star:  Math.round(element.vote_average / 2)
-//     }
-//   })
-//
-// }
-
-
-
-
-
-
-// API
-// https://flynn.boolean.careers/exercises/api/array/music

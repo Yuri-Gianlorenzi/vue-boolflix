@@ -17,30 +17,50 @@
       <div id="app" class="container">
         <header>
           <div class="logo">
-            logo
+            <img src="img/logo.png" alt="Yurflix logo">
+          </div>
+          <div class="filter_content">
+            <ul class="filter_content_list">
+              <li>Home</li>
+              <li>Film</li>
+              <li>Serie Tv</li>
+              <li>Lista preferiti</li>
+            </ul>
           </div>
           <div class="nav">
-            <input type="text" v-model="query" @keyup.enter="searchGlobal">
+            <input type="text" v-model="query" @keyup.enter="searchGlobal" placeholder=" Ricerca un titolo">
+            <i class="fas fa-search"></i>
+            <img src="img/foto_profilo.jpg" alt="foto_profilo">
           </div>
         </header>
         <!-- / header -->
 
         <main>
-          <div class="content_box" v-for="film in filmSearched" v-if="filmSearched">
-            <!-- per inserire la stessa immagine tutte le volte che non abbiamo la copertina api, yutilizziamo un v-if/v-else -->
-            <img v-if="!film.poster_path" src="img/poster-placeholder.png" :alt="film.original_title">
-            <img v-else :src="'https://image.tmdb.org/t/p/'+'w342'+film.poster_path" :alt="film.original_title">
-            <!-- le key delle due chiamate hanno valori simili ma alcuni diversi, con  or facciamo in modo che li stampi sempre in entrambi i casi  -->
-            <p class="title">{{film.title || film.name}}</p>
-            <p class="o_title">{{film.original_title || film.original_name}}</p>
-            <p class="vote">{{film.vote_average}}</p>
-            <p class="lan">{{film.original_language}}</p>
-            <img class="img_lang" :src="'img/'+film.original_language+'.png'" alt="">
-            <p class="lan">{{film.vote_star}}</p>
-            <ul class="star_vote">
-              <!-- per le stelle viene utilizzato un v-for di lunghezza 5 (verranno stampate 5 stelle grige di base). con v-bind sulla classe coloriamo di giallo un numero di stelle pari al valore di vote_star, inserito nel then. la condizione fa si che iniziano a colorarsi dalla prima  -->
-              <li v-for="n in 5" :class="(film.vote_star >= n) ? 'yellow' : ''"><i class="fas fa-star"></i></li>
-            </ul>
+          <div class="content_box" v-for="film in all" v-if="all">
+            <!-- contenitore per immagine copertina -->
+            <div class="poster">
+              <!-- per inserire la stessa immagine tutte le volte che non abbiamo la copertina api, yutilizziamo un v-if/v-else -->
+              <img v-if="!film.poster_path" src="img/poster-placeholder.png" :alt="film.original_title">
+              <img v-else :src="'https://image.tmdb.org/t/p/'+'w342'+film.poster_path" :alt="film.original_title">
+            </div>
+            <!-- fine contenitore poster -->
+
+            <!-- inizio contenitore info  -->
+            <div class="about">
+              <!-- le key delle due chiamate hanno valori simili ma alcuni diversi, con  or facciamo in modo che li stampi sempre in entrambi i casi  -->
+              <p class="title">{{film.title || film.name}}</p>
+              <p class="o_title">{{film.original_title || film.original_name}}</p>
+              <p class="vote">{{film.vote_average}}</p>
+              <p class="lan">{{film.original_language}}</p>
+              <img class="img_lang" :src="'img/'+film.original_language+'.png'" alt="">
+              <p class="lan">{{film.vote_star}}</p>
+              <ul class="star_vote">
+                <!-- per le stelle viene utilizzato un v-for di lunghezza 5 (verranno stampate 5 stelle grige di base). con v-bind sulla classe coloriamo di giallo un numero di stelle pari al valore di vote_star, inserito nel then. la condizione fa si che iniziano a colorarsi dalla prima  -->
+                <li v-for="n in 5" :class="(film.vote_star >= n) ? 'yellow' : ''"><i class="fas fa-star"></i></li>
+              </ul>
+            </div>
+            <!-- fine contenitore info about -->
+            
           </div>
           <!-- <div class="content_box">
             <p class="title">title</p>
