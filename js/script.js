@@ -10,7 +10,6 @@ let app = new Vue({
     filmSearched : '',
     tvSearch : '',
     all : '',
-    filmQueue : [],
     allTypes : ''
   },//fine data
 
@@ -114,24 +113,26 @@ let app = new Vue({
       this.indexSelected = index;
 
       if (index == 0) {
-        this.all = '';
+        // this.all = '';
         console.log(this.all);
         this.all = [...this.filmSearched,...this.tvSearch];
       };
 
+      if (index == 1) {
+        // this.all = '';
+        console.log(this.all);
+        this.all = [...this.filmSearched];
+      };
+
+      if (index == 2) {
+        // this.all = '';
+        console.log(this.all);
+        this.all = [...this.tvSearch];
+      };
+
       if (index == 3) {
-        this.all.forEach(element => {
-          this.filmQueue.push(element);
-        });
 
-
-        this.all = [],
-        console.log(this.filmQueue);
-
-
-        this.filmSaved.forEach(element => {
-          this.all.push(element);
-        });
+        this.all = [...this.filmSaved];
 
       }// if click lista preferiti
 
