@@ -21,15 +21,15 @@
           </div>
           <div class="filter_content">
             <ul class="filter_content_list">
-              <li>Home</li>
+              <li class="clicked">Home</li>
               <li>Film</li>
               <li>Serie Tv</li>
               <li>Lista preferiti</li>
             </ul>
           </div>
           <div class="nav">
-            <input type="text" v-model="query" @keyup.enter="searchGlobal" placeholder=" Ricerca un titolo">
-            <i class="fas fa-search"></i>
+            <input type="text" v-model="query" @keyup.enter="searchGlobal" placeholder=" Ricerca un titolo" id="search" name="search">
+            <label for="search"><i class="fas fa-search"></i></label>
             <img src="img/foto_profilo.jpg" alt="foto_profilo">
           </div>
         </header>
