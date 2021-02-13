@@ -21,10 +21,7 @@
           </div>
           <div class="filter_content">
             <ul class="filter_content_list">
-              <li class="clicked">Home</li>
-              <li>Film</li>
-              <li>Serie Tv</li>
-              <li>Lista preferiti</li>
+              <li v-for="(what, index) in whatSelect" :class="(index == indexSelected) ? 'clicked' : ''" @click="showWhat(index)">{{what}}</li>
             </ul>
           </div>
           <div class="nav">
@@ -40,7 +37,7 @@
             <!-- contenitore per immagine copertina -->
             <div class="poster">
               <!-- per inserire la stessa immagine tutte le volte che non abbiamo la copertina api, yutilizziamo un v-if/v-else -->
-              <img v-if="!film.poster_path" src="img/poster-placeholder.png" :alt="film.original_title">
+              <img v-if="!film.poster_path" src="img\noposter.jpg" :alt="film.original_title">
               <img v-else :src="'https://image.tmdb.org/t/p/'+'w342'+film.poster_path" :alt="film.original_title">
             </div>
             <!-- fine contenitore poster -->
@@ -60,7 +57,7 @@
                   <!-- per le stelle viene utilizzato un v-for di lunghezza 5 (verranno stampate 5 stelle grige di base). con v-bind sulla classe coloriamo di giallo un numero di stelle pari al valore di vote_star, inserito nel then. la condizione fa si che iniziano a colorarsi dalla prima  -->
                   <li v-for="n in 5" :class="(film.vote_star >= n) ? 'yellow' : ''"><i class="fas fa-star"></i></li>
                 </ul>
-                <div class="add_favorite"><i class="fas fa-plus-circle"></i></div>
+                <div class="add_favorite"><i @click="saveFilm(film)" class="fas fa-plus-circle"></i></div>
               </div>
               <!-- fine box about_icons -->
 

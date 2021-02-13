@@ -4,9 +4,13 @@ let app = new Vue({
   data : {
     query : '',
     apiKey : '1c2bfcf8efd8a513cb5a624bbe643c1b',
+    whatSelect : ['Home', 'Film', 'Serie Tv', 'Lista Preferiti'],
+    indexSelected : '',
+    filmSaved : [],
     filmSearched : '',
     tvSearch : '',
     all : '',
+    filmQueue : [],
     allTypes : ''
   },//fine data
 
@@ -96,11 +100,39 @@ let app = new Vue({
         .catch((error) => alert(error));
 
 
+    },//fine searchGlobal
+
+    saveFilm(film) {
+      if (!this.filmSaved.includes(film)) {
+        this.filmSaved.push(film);
+        console.log(this.filmSaved);
+
+      }
+    },//fine filmSaved
+
+    showWhat(index) {
+      this.indexSelected = index;
 
 
+      if (index == 3) {
+        this.all.forEach(element => {
+          this.filmQueue.push(element);
+        });
 
 
-    }//fine searchGlobal
+        this.all = [],
+        console.log(this.filmQueue);
+
+
+        this.filmSaved.forEach(element => {
+          this.all.push(element);
+        });
+
+      }
+
+    }//fine changeSelected
+
+
 
 
 

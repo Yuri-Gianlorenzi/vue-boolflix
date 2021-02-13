@@ -178,11 +178,11 @@ main {
 
 .content_box:hover div.about {
   opacity: 1;
-  display: -webkit-box;
+  /* display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
   white-space: normal;
-  overflow: hidden;
+  overflow: hidden; */
 }
 
 /* per formattare l'immagine dietro il poster */
@@ -262,7 +262,7 @@ main {
 /* trama */
 .content_box .about .overview {
   min-height: 30%;
-
+  flex-grow: 2;
   font-size: 12px;
   color: rgb(227, 227, 227);
   /* text-rendering: optimizeLegibility; */
