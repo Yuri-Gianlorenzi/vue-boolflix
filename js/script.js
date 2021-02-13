@@ -113,6 +113,11 @@ let app = new Vue({
     showWhat(index) {
       this.indexSelected = index;
 
+      if (index == 0) {
+        this.all = '';
+        console.log(this.all);
+        this.all = [...this.filmSearched,...this.tvSearch];
+      };
 
       if (index == 3) {
         this.all.forEach(element => {
@@ -128,7 +133,7 @@ let app = new Vue({
           this.all.push(element);
         });
 
-      }
+      }// if click lista preferiti
 
     }//fine changeSelected
 
