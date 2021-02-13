@@ -112,29 +112,29 @@ let app = new Vue({
     showWhat(index) {
       this.indexSelected = index;
 
-      if (index == 0) {
-        // this.all = '';
-        console.log(this.all);
+
+
+      switch (index) {
+
+        case 0:
         this.all = [...this.filmSearched,...this.tvSearch];
-      };
+        break;
 
-      if (index == 1) {
-        // this.all = '';
-        console.log(this.all);
+        case 1:
         this.all = [...this.filmSearched];
-      };
+        break;
 
-      if (index == 2) {
-        // this.all = '';
-        console.log(this.all);
-        this.all = [...this.tvSearch];
-      };
+        case 2:
+        this.all = this.all = [...this.tvSearch];
+        break;
 
-      if (index == 3) {
-
+        case 3:
         this.all = [...this.filmSaved];
+        break;
+      }//fine switch
 
-      }// if click lista preferiti
+
+
 
     }//fine changeSelected
 
@@ -145,3 +145,53 @@ let app = new Vue({
 
   }//fine methods
 });//fine vue
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// if (index == 0) {
+//   // this.all = '';
+//   console.log(this.all);
+//   this.all = [...this.filmSearched,...this.tvSearch];
+// };
+//
+// if (index == 1) {
+//   // this.all = '';
+//   console.log(this.all);
+//   this.all = [...this.filmSearched];
+// };
+//
+// if (index == 2) {
+//   // this.all = '';
+//   console.log(this.all);
+//   this.all = [...this.tvSearch];
+// };
+//
+// if (index == 3) {
+//
+//   this.all = [...this.filmSaved];
+//
+// }// if click lista preferiti
