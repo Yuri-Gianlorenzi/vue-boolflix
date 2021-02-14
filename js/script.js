@@ -107,6 +107,8 @@ let app = new Vue({
         .catch((error) => alert(error));
 
 
+        //per svuotare il doppione di all quando l'user fa una nuova ricerca
+        this.allNotFiltered = '';
     },//fine searchGlobal
 
     saveFilm(film) {
