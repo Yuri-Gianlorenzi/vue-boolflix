@@ -4,13 +4,14 @@ let app = new Vue({
   data : {
     query : '',
     apiKey : '1c2bfcf8efd8a513cb5a624bbe643c1b',
-    whatSelect : ['Home', 'Film', 'Serie Tv', 'Lista Preferiti'],
+    whatSelect : ['Home', 'Film', 'Serie Tv', 'Lista Preferiti','Generi'],
     indexSelected : '',
     filmSaved : [],
     filmSearched : '',
     tvSearch : '',
     all : '',
-    allTypes : ''
+    allTypes : '',
+    openGenre : false
   },//fine data
 
   mounted() {
@@ -25,7 +26,8 @@ let app = new Vue({
         }
       })
       .then((result) => {
-        console.log(result.data.genres)
+        console.log(result.data.genres);
+        
       })//fine then
 
 
@@ -40,6 +42,8 @@ let app = new Vue({
   },//fine mounted
 
   methods : {
+    //per far partire la funzione searchGlobal amche al click dell'icona-lente
+    clickSearchGlobal () {this.searchGlobal()},
 
     searchGlobal() {
 
@@ -117,20 +121,33 @@ let app = new Vue({
       switch (index) {
 
         case 0:
+        this.openGenre = false;
         this.all = [...this.filmSearched,...this.tvSearch];
         break;
 
         case 1:
+        this.openGenre = false;
         this.all = [...this.filmSearched];
         break;
 
         case 2:
+        this.openGenre = false;
         this.all = this.all = [...this.tvSearch];
         break;
 
         case 3:
+        this.openGenre = false;
         this.all = [...this.filmSaved];
         break;
+
+        case 4:
+        if (!this.openGenre) {
+          this.openGenre = true;
+        } else {
+          this.openGenre = false;
+        }
+        break;
+
       }//fine switch
 
 

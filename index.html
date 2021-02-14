@@ -9,7 +9,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
         <!-- Link Vue -->
         <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-        <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
@@ -23,10 +24,15 @@
             <ul class="filter_content_list">
               <li v-for="(what, index) in whatSelect" :class="(index == indexSelected) ? 'clicked' : ''" @click="showWhat(index)">{{what}}</li>
             </ul>
+            <div class="box_genres" v-if="openGenre">
+              <ul class="list_genre">
+                <li v-for="i in 19">ciao</li>
+              </ul>
+            </div>
           </div>
           <div class="nav">
             <input type="text" v-model="query" @keyup.enter="searchGlobal" placeholder=" Ricerca un titolo" id="search" name="search">
-            <label for="search"><i class="fas fa-search"></i></label>
+            <label for="search"><i @click="clickSearchGlobal" class="fas fa-search"></i></label>
             <img src="img/foto_profilo.jpg" alt="foto_profilo">
           </div>
         </header>
