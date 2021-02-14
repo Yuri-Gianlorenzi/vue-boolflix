@@ -83,11 +83,9 @@ header .filter_content_list li:hover {
 
 .filter_content .box_genres ul.list_genre {
   display: flex;
-  /* flex-direction: column; */
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  /* justify-content: */
 
 }
 

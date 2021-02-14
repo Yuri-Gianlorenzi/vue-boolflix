@@ -11,7 +11,10 @@ let app = new Vue({
     tvSearch : '',
     all : '',
     allTypes : '',
-    openGenre : false
+    allFiltered : [],
+    allNotFiltered : '',
+    openGenre : false,
+    typeSelected : ''
   },//fine data
 
   mounted() {
@@ -26,8 +29,9 @@ let app = new Vue({
         }
       })
       .then((result) => {
-        console.log(result.data.genres);
-        
+        // console.log(result.data.genres);
+        this.allTypes = result.data.genres;
+        // console.log(this.allTypes);
       })//fine then
 
 
@@ -74,12 +78,12 @@ let app = new Vue({
         .then(axios.spread((result,show) => {
           //result è la variabile per la chiamata MOVIE
           //show è la variabile per la chiamata SERIE TV
-          console.log(result.data.page);
+          // console.log(result.data.page);
           this.filmSearched = result.data.results;
-          console.log(this.filmSearched);
+          // console.log(this.filmSearched);
 
           this.tvSearch = show.data.results;
-          console.log(this.tvSearch);
+          // console.log(this.tvSearch);
 
 
 
@@ -108,7 +112,7 @@ let app = new Vue({
     saveFilm(film) {
       if (!this.filmSaved.includes(film)) {
         this.filmSaved.push(film);
-        console.log(this.filmSaved);
+        // console.log(this.filmSaved);
 
       }
     },//fine filmSaved
@@ -153,7 +157,36 @@ let app = new Vue({
 
 
 
-    }//fine changeSelected
+    },//fine changeSelected
+
+    genreSelected (indexType) {
+
+      //fer assegnare la classe clicked
+      this.typeSelected = indexType;
+      console.log(this.typeSelected);
+      this.openGenre = false;
+
+      this.allFiltered = [];
+
+      if (this.allNotFiltered) {
+        this.all = this.allNotFiltered;
+        console.log(this.all);
+      } else {
+        this.allNotFiltered = this.all;
+        console.log(this.allNotFiltered);
+      };
+
+      this.all.forEach(element => {
+
+        if (element.genre_ids.includes(this.allTypes[indexType].id)) {
+          this.allFiltered.push(element);
+        }
+
+
+      });//foreach
+
+      this.all = this.allFiltered;
+    }
 
 
 

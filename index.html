@@ -26,7 +26,7 @@
             </ul>
             <div class="box_genres" v-if="openGenre">
               <ul class="list_genre">
-                <li v-for="i in 19">ciao</li>
+                <li v-for="(type, indexType) in allTypes" @click="genreSelected(indexType)" :class="(indexType == typeSelected) ? 'clicked' : ''">{{type.name}}</li>
               </ul>
             </div>
           </div>
